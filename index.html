@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>مراجعة الدورة التكوينية عن يوم الاقتراع</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #eef2f3; margin: 0; padding: 20px; }
+        .quiz-container { max-width: 850px; margin: auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+        h1 { text-align: center; color: #2c3e50; border-bottom: 3px solid #27ae60; padding-bottom: 10px; }
+        .door-section { display: none; }
+        .door-section.active { display: block; }
+        .door-title { background: #27ae60; color: white; padding: 12px; border-radius: 5px; margin-bottom: 20px; font-size: 1.2em; }
+        .question { margin-bottom: 20px; padding: 15px; border-right: 5px solid #3498db; background: #f9f9f9; }
+        .options label { display: block; margin: 8px 0; cursor: pointer; transition: 0.2s; }
+        .options label:hover { color: #27ae60; }
+        .nav-buttons { display: flex; justify-content: space-between; margin-top: 30px; }
+        button { padding: 12px 25px; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; font-weight: bold; }
+        .btn-next { background: #27ae60; color: white; }
+        .btn-prev { background: #95a5a6; color: white; }
+        .btn-submit { background: #2c3e50; color: white; width: 100%; margin-top: 20px; }
+        #results-area { display: none; margin-top: 30px; border-top: 2px dashed #ccc; padding-top: 20px; }
+        .score-box { font-size: 24px; text-align: center; font-weight: bold; color: #2c3e50; margin-bottom: 20px; }
+        .correct-answers-list { background: #fffbe6; padding: 20px; border-radius: 8px; border: 1px solid #ffe58f; }
+        .ans-item { margin-bottom: 10px; border-bottom: 1px dotted #ccc; padding-bottom: 5px; }
+    </style>
+</head>
+<body>
+
+<div class="quiz-container">
+    <h1>مراجعة الدورة التكوينية عن يوم الاقتراع</h1>
+    
+    <form id="quizForm">
+        <!-- الباب الأول: التنظيم والمكان -->
+        <div class="door-section active" id="door1">
+            <div class="door-title">الباب الأول: تنظيم مكتب التصويت وطريقة الجلوس</div>
+            <div class="question">
+                <p>1. يجلس أعضاء مكتب التصويت الخمسة حول طاولة مخصصة تشكل ما يسمى بـ:</p>
+                <div class="options">
+                    <label><input type="radio" name="q1" value="0"> نقطة التفتيش الخارجية</label>
+                    <label><input type="radio" name="q1" value="1"> نقطة المراقبة المركزية لغرفة الاقتراع</label>
+                    <label><input type="radio" name="q1" value="0"> مكتب الإدارة المحلية</label>
+                </div>
+            </div>
+            <div class="question">
+                <p>2. (صح أم خطأ) يجب تزويد المكتب بمعزل واحد أو أكثر لضمان السرية، بشرط ألا يحجب رؤية الجمهور للمسار العام للعملية:</p>
+                <div class="options">
+                    <label><input type="radio" name="q2" value="1"> صح</label>
+                    <label><input type="radio" name="q2" value="0"> خطأ</label>
+                </div>
+            </div>
+            <div class="question">
+                <p>3. يتم قفل صندوق الاقتراع بقفلين مختلفين، يحتفظ رئيس المكتب بالمفتاح الأول، بينما يحتفظ بالمفتاح الثاني:</p>
+                <div class="options">
+                    <label><input type="radio" name="q3" value="0"> نائب رئيس المكتب</label>
+                    <label><input type="radio" name="q3" value="1"> العضو المساعد الأكبر سناً</label>
+                    <label><input type="radio" name="q3" value="0"> ممثل السلطة المستقلة</label>
+                </div>
+            </div>
+        </div>
+
+        <!-- الباب الثاني: مهام رئيس المكتب -->
+        <div class="door-section" id="door2">
+            <div class="door-title">الباب الثاني: مهام رئيس مكتب التصويت</div>
+            <div class="question">
+                <p>4. يتمتع رئيس مكتب التصويت داخل المكتب بـ:</p>
+                <div class="options">
+                    <label><input type="radio" name="q4" value="1"> سلطة الضبط وحفظ النظام</label>
+                    <label><input type="radio" name="q4" value="0"> سلطة تشريعية مؤقتة</label>
+                    <label><input type="radio" name="q4" value="0"> سلطة قضائية عليا</label>
+                </div>
+            </div>
+            <div class="question">
+                <p>5. (صح أم خطأ) رئيس المكتب ملزم بالتأكد من المطابقة بين عدد الأظرفة وأوراق التصويت والعدد القانوني للناخبين قبل الافتتاح:</p>
+                <div class="options">
+                    <label><input type="radio" name="q5" value="1"> صح</label>
+                    <label><input type="radio" name="q5" value="0"> خطأ</label>
+                </div>
+            </div>
+            <div class="question">
+                <p>6. من مهام رئيس المكتب الإشراف على عملية التوثيق والختم، والتي تشمل التبصيم بـ:</p>
+                <div class="options">
+                    <label><input type="radio" name="q6" value="0"> الإبهام الأيمن</label>
+                    <label><input type="radio" name="q6" value="1"> السبابة اليسرى بحبر لا يمحى</label>
+                    <label><input type="radio" name="q6" value="0"> أي إصبع يختاره الناخب</label>
+                </div>
+            </div>
+            <div class="question">
+                <p>7. (صح أم خطأ) يحق لرئيس المكتب استدعاء القوة العمومية مباشرة دون رخصة تسخير من رئيس مركز التصويت:</p>
+                <div class="options">
+                    <label><input type="radio" name="q7" value="0"> صح</label>
+                    <label><input type="radio" name="q7" value="1"> خطأ (يحتاج رخصة تسخير)</label>
+                </div>
+            </div>
+        </div>
+
+        <!-- الباب الثالث: آلية الفرز وأنواع الأوراق -->
+        <div class="door-section" id="door3">
+            <div class="door-title">الباب الثالث: آلية الفرز وتصنيف أوراق التصويت</div>
+            <div class="question">
+                <p>8. يتم تعيين "الفارزين" لعد الأصوات علناً من بين:</p>
+                <div class="options">
+                    <label><input type="radio" name="q8" value="0"> ممثلي الأحزاب</label>
+                    <label><input type="radio" name="q8" value="1"> الناخبين الحاضرين (غير المترشحين)</label>
+                    <label><input type="radio" name="q8" value="0"> أعوان الأمن</label>
+                </div>
+            </div>
+            <div class="question">
+                <p>9. الأوراق التي لا تحتسب ضمن النتائج لعدم مطابقتها للقانون تسمى:</p>
+                <div class="options">
+                    <label><input type="radio" name="q9" value="0"> الأوراق المعبر عنها</label>
+                    <label><input type="radio" name="q9" value="1"> الأوراق الملغاة</label>
+                    <label><input type="radio" name="q9" value="0"> الأوراق البيضاء</label>
+                </div>
+            </div>
+            <div class="question">
+                <p>10. (صح أم خطأ) تعتبر الأوراق التي تحمل علامات إضافية أو المشطوبة كلياً أوراقاً ملغاة:</p>
+                <div class="options">
+                    <label><input type="radio" name="q10" value="1"> صح</label>
+                    <label><input type="radio" name="q10" value="0"> خطأ</label>
+                </div>
+            </div>
+            <div class="question">
+                <p>11. الأوراق التي يثور حولها شك أو نزاع بين أعضاء المكتب أثناء الفرز تسمى:</p>
+                <div class="options">
+                    <label><input type="radio" name="q11" value="0"> أوراق صحيحة</label>
+                    <label><input type="radio" name="q11" value="1"> أوراق متنازع في صحتها</label>
+                    <label><input type="radio" name="q11" value="0"> أوراق تالفة</label>
+                </div>
+            </div>
+        </div>
+
+        <!-- الباب الرابع: حساب الأصوات والشفافية -->
+        <div class="door-section" id="door4">
+            <div class="door-title">الباب الرابع: كيفية حساب الأصوات وتسليم المحاضر</div>
+            <div class="question">
+                <p>12. المعادلة القانونية لحساب "الأصوات المعبر عنها" هي:</p>
+                <div class="options">
+                    <label><input type="radio" name="q12" value="1"> الناخبون المصوتون - (الملغاة + المتنازع فيها)</label>
+                    <label><input type="radio" name="q12" value="0"> مجموع الأوراق داخل الصندوق</label>
+                    <label><input type="radio" name="q12" value="0"> الناخبون المسجلون - الغائبون</label>
+                </div>
+            </div>
+            <div class="question">
+                <p>13. (صح أم خطأ) يتم تسليم نسخة المحضر للممثلين في اليوم الموالي بمقر الولاية:</p>
+                <div class="options">
+                    <label><input type="radio" name="q13" value="0"> صح</label>
+                    <label><input type="radio" name="q13" value="1"> خطأ (تُسلم فوراً داخل المكتب)</label>
+                </div>
+            </div>
+            <div class="question">
+                <p>14. يجب أن تُغمد (تختم) كل صفحات نسخة المحضر المسلمة للممثلين بـ:</p>
+                <div class="options">
+                    <label><input type="radio" name="q14" value="0"> ختم جاف</label>
+                    <label><input type="radio" name="q14" value="1"> ختم ندي (رطب) يتضمن عبارة "نسخة مصادق عليها"</label>
+                    <label><input type="radio" name="q14" value="0"> توقيع الكاتب فقط</label>
+                </div>
+            </div>
+            <div class="question">
+                <p>15. (صح أم خطأ) لا تُسلم النسخة لأي ممثل إلا مقابل توقيعه الفوري على وصل استلام رسمي:</p>
+                <div class="options">
+                    <label><input type="radio" name="q15" value="1"> صح</label>
+                    <label><input type="radio" name="q15" value="0"> خطأ</label>
+                </div>
+            </div>
+        </div>
+
+        <!-- الباب الخامس: الجزاءات والتفاصيل الدقيقة -->
+        <div class="door-section" id="door5">
+            <div class="door-title">الباب الخامس: جزاءات وأحكام إضافية</div>
+            <div class="question">
+                <p>16. عقوبة الامتناع عن تسليم نسخة المحضر للممثلين المؤهلين هي الحبس من:</p>
+                <div class="options">
+                    <label><input type="radio" name="q16" value="1"> سنة (1) إلى ثلاث (3) سنوات</label>
+                    <label><input type="radio" name="q16" value="0"> شهر إلى 6 أشهر</label>
+                    <label><input type="radio" name="q16" value="0"> أسبوع فقط</label>
+                </div>
+            </div>
+            <div class="question">
+                <p>17. (صح أم خطأ) الأظرفة الفارغة (بدون ورقة تصويت) تعتبر أصواتاً صحيحة:</p>
+                <div class="options">
+                    <label><input type="radio" name="q17" value="0"> صح</label>
+                    <label><input type="radio" name="q17" value="1"> خطأ (تعتبر أوراقاً ملغاة)</label>
+                </div>
+            </div>
+            <div class="question">
+                <p>18. يجب إيداع قائمة الممثلين المؤهلين لدى السلطة المستقلة قبل يوم الاقتراع بـ:</p>
+                <div class="options">
+                    <label><input type="radio" name="q18" value="1"> 20 يوماً كاملة على الأقل</label>
+                    <label><input type="radio" name="q18" value="0"> 5 أيام فقط</label>
+                    <label><input type="radio" name="q18" value="0"> شهرين</label>
+                </div>
+            </div>
+            <div class="question">
+                <p>19. (صح أم خطأ) تُفرز "الأصوات البيضاء" بشكل مستقل لتحديد نسب المشاركة في محضر الفرز:</p>
+                <div class="options">
+                    <label><input type="radio" name="q19" value="1"> صح</label>
+                    <label><input type="radio" name="q19" value="0"> خطأ</label>
+                </div>
+            </div>
+            <div class="question">
+                <p>20. يوقع محضر الفرز النهائي من قبل:</p>
+                <div class="options">
+                    <label><input type="radio" name="q20" value="0"> رئيس المكتب وحده</label>
+                    <label><input type="radio" name="q20" value="1"> رئيس المكتب وكافة أعضائه</label>
+                    <label><input type="radio" name="q20" value="0"> المنسق الولائي فقط</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="nav-buttons">
+            <button type="button" class="btn-prev" id="prevBtn" onclick="changeDoor(-1)">السابق</button>
+            <button type="button" class="btn-next" id="nextBtn" onclick="changeDoor(1)">الباب التالي</button>
+        </div>
+        <button type="button" class="btn-submit" id="submitBtn" style="display:none;" onclick="calculateScore()">عرض النتيجة النهائية والأجوبة الصحيحة</button>
+    </form>
+
+    <div id="results-area">
+        <div class="score-box" id="scoreDisplay"></div>
+        <div class="correct-answers-list" id="answersList">
+            <h3>مراجعة الإجابات الصحيحة (بناءً على القانون):</h3>
+            <!-- ستظهر الإجابات هنا -->
+        </div>
+    </div>
+</div>
+
+<script>
+    let currentDoor = 1;
+    const totalDoors = 5;
+
+    function changeDoor(step) {
+        document.getElementById(`door${currentDoor}`).classList.remove('active');
+        currentDoor += step;
+        document.getElementById(`door${currentDoor}`).classList.add('active');
+
+        document.getElementById('prevBtn').style.visibility = (currentDoor === 1) ? 'hidden' : 'visible';
+        
+        if (currentDoor === totalDoors) {
+            document.getElementById('nextBtn').style.display = 'none';
+            document.getElementById('submitBtn').style.display = 'block';
+        } else {
+            document.getElementById('nextBtn').style.display = 'block';
+            document.getElementById('submitBtn').style.display = 'none';
+        }
+    }
+
+    // إخفاء زر السابق في البداية
+    document.getElementById('prevBtn').style.visibility = 'hidden';
+
+    function calculateScore() {
+        const form = document.getElementById('quizForm');
+        const formData = new FormData(form);
+        let score = 0;
+        for (let value of formData.values()) {
+            score += parseInt(value);
+        }
+
+        document.getElementById('scoreDisplay').innerHTML = `نتيجتك: ${score} من 20 نقطة`;
+        document.getElementById('results-area').style.display = 'block';
+
+        const correctAnswers = [
+            "1. نقطة المراقبة المركزية لغرفة الاقتراع [131، 138]",
+            "2. صح: لضمان الرؤية ومنع التجاوزات [1]",
+            "3. العضو المساعد الأكبر سناً [2]",
+            "4. سلطة الضبط وحفظ النظام داخل المكتب [3]",
+            "5. صح: لضمان المطابقة التامة (المادة 136) [91، 93]",
+            "6. السبابة اليسرى بحبر لا يمحى (المادة 150) [4]",
+            "7. خطأ: يحتاج رخصة تسخير من رئيس المركز (المادة 140) [5]",
+            "8. الناخبين الحاضرين (بشرط ألا يكونوا ممثلين) [6]",
+            "9. الأوراق الملغاة (المادتين 44 و140) [19، 140]",
+            "10. صح: تعتبر ملغاة بنص القانون [23، 140]",
+            "11. الأوراق المتنازع في صحتها [26، 32]",
+            "12. الناخبون المصوتون - (الملغاة + المتنازع فيها) [7]",
+            "13. خطأ: تُسلم فوراً وداخل مكتب التصويت حصراً (المادة 155) [54، 60]",
+            "14. ختم ندي (رطب) أزرق بعبارة صريحة [55، 57، 73]",
+            "15. صح: وصل الاستلام هو 'الشرط الذهبي' للتسليم [8]",
+            "16. عقوبة سالبة للحرية من سنة إلى 3 سنوات [9]",
+            "17. خطأ: الأظرفة الفارغة حالة من حالات البطلان [10]",
+            "18. 20 يوماً كاملة على الأقل (المادة 144) [52، 79]",
+            "19. صح: لتحديد دقيق لنسب المشاركة [36، 40]",
+            "20. توقيع رئيس المكتب وكافة أعضائه لضمان الشفافية [11]"
+        ];
+
+        let answersHTML = "<h3>مراجعة الإجابات الصحيحة والمصادر:</h3>";
+        correctAnswers.forEach(ans => {
+            answersHTML += `<div class="ans-item">${ans}</div>`;
+        });
+        document.getElementById('answersList').innerHTML = answersHTML;
+        
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+</script>
+</body>
+</html>

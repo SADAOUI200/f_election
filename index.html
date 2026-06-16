@@ -2,26 +2,291 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>مراجعة الدورة التكوينية عن يوم الاقتراع</title>
     <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #eef2f3; margin: 0; padding: 20px; }
-        .quiz-container { max-width: 850px; margin: auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
-        h1 { text-align: center; color: #2c3e50; border-bottom: 3px solid #27ae60; padding-bottom: 10px; }
+        :root {
+            --primary-color: #27ae60;
+            --secondary-color: #2c3e50;
+            --bg-color: #f4f7f6;
+            --text-color: #2d3748;
+            --accent-color: #3498db;
+            --card-bg: #ffffff;
+            --danger-color: #e74c3c;
+        }
+
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            background-color: var(--bg-color); 
+            margin: 0; 
+            padding: 25px; 
+            color: var(--text-color);
+            line-height: 1.7;
+            font-size: 18px;
+        }
+
+        .quiz-container { 
+            max-width: 850px; 
+            margin: 40px auto; 
+            background: var(--card-bg); 
+            padding: 40px; 
+            border-radius: 20px; 
+            box-shadow: 0 20px 40px rgba(0,0,0,0.06); 
+        }
+
+        h1 { 
+            text-align: center; 
+            color: var(--secondary-color); 
+            font-size: 28px; 
+            margin-bottom: 35px;
+            position: relative;
+            padding-bottom: 15px;
+            font-weight: 700;
+        }
+
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 5px;
+            background-color: var(--primary-color);
+            border-radius: 3px;
+        }
+
+        .progress-container {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 35px;
+            background: #edf2f7;
+            border-radius: 12px;
+            padding: 6px;
+        }
+        .progress-step {
+            flex: 1;
+            text-align: center;
+            padding: 10px 5px;
+            font-size: 16px; 
+            font-weight: bold;
+            color: #718096;
+            transition: 0.3s;
+            border-radius: 8px;
+        }
+        .progress-step.active {
+            background: var(--primary-color);
+            color: white;
+            box-shadow: 0 4px 10px rgba(39, 174, 96, 0.2);
+        }
+
+        .alert-message {
+            display: none;
+            background-color: #fff5f5;
+            color: var(--danger-color);
+            border: 1px solid #fed7d7;
+            padding: 15px 20px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            font-weight: bold;
+            font-size: 17px;
+            animation: shake 0.4s ease;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-8px); }
+            75% { transform: translateX(8px); }
+        }
+
         .door-section { display: none; }
-        .door-section.active { display: block; }
-        .door-title { background: #27ae60; color: white; padding: 12px; border-radius: 5px; margin-bottom: 20px; font-size: 1.2em; }
-        .question { margin-bottom: 20px; padding: 15px; border-right: 5px solid #3498db; background: #f9f9f9; }
-        .options label { display: block; margin: 8px 0; cursor: pointer; transition: 0.2s; }
-        .options label:hover { color: #27ae60; }
-        .nav-buttons { display: flex; justify-content: space-between; margin-top: 30px; }
-        button { padding: 12px 25px; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; font-weight: bold; }
-        .btn-next { background: #27ae60; color: white; }
-        .btn-prev { background: #95a5a6; color: white; }
-        .btn-submit { background: #2c3e50; color: white; width: 100%; margin-top: 20px; }
-        #results-area { display: none; margin-top: 30px; border-top: 2px dashed #ccc; padding-top: 20px; }
-        .score-box { font-size: 24px; text-align: center; font-weight: bold; color: #2c3e50; margin-bottom: 20px; }
-        .correct-answers-list { background: #fffbe6; padding: 20px; border-radius: 8px; border: 1px solid #ffe58f; }
-        .ans-item { margin-bottom: 10px; border-bottom: 1px dotted #ccc; padding-bottom: 5px; }
+        .door-section.active { display: block; animation: fadeIn 0.5s ease; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .door-title { 
+            background: linear-gradient(135deg, var(--primary-color), #2cd173); 
+            color: white; 
+            padding: 18px 25px; 
+            border-radius: 12px; 
+            margin-bottom: 30px; 
+            font-size: 22px; 
+            font-weight: bold;
+            box-shadow: 0 6px 15px rgba(39, 174, 96, 0.15);
+        }
+
+        .question { 
+            margin-bottom: 30px; 
+            padding: 25px; 
+            border-right: 6px solid var(--accent-color); 
+            background: #f8fafc; 
+            border-radius: 4px 16px 16px 4px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.01);
+        }
+
+        .question p {
+            margin-top: 0;
+            font-weight: 700;
+            color: var(--secondary-color);
+            font-size: 19px; 
+            margin-bottom: 18px;
+        }
+
+        .options label { 
+            display: flex;
+            align-items: center;
+            margin: 14px 0; 
+            cursor: pointer; 
+            transition: all 0.25s ease; 
+            padding: 15px 20px;
+            border: 2px solid #e2e8f0; 
+            border-radius: 10px;
+            background: #fff;
+            font-size: 18px; 
+        }
+
+        .options label:hover { 
+            border-color: var(--primary-color);
+            background: #f5fbf7;
+            color: var(--primary-color);
+        }
+
+        .options input[type="radio"] {
+            margin-left: 15px;
+            accent-color: var(--primary-color);
+            transform: scale(1.3); 
+        }
+
+        .options label:has(input[type="radio"]:checked) {
+            border-color: var(--primary-color);
+            background: #eafaf1;
+            font-weight: bold;
+            box-shadow: 0 4px 12px rgba(39, 174, 96, 0.08);
+        }
+
+        .nav-buttons { 
+            display: flex; 
+            justify-content: space-between; 
+            margin-top: 35px; 
+            gap: 20px;
+        }
+
+        button { 
+            padding: 15px 35px; 
+            border: none; 
+            border-radius: 10px; 
+            cursor: pointer; 
+            font-size: 18px; 
+            font-weight: bold; 
+            transition: all 0.2s ease;
+        }
+
+        button:active {
+            transform: scale(0.97);
+        }
+
+        .btn-next { 
+            background: var(--primary-color); 
+            color: white; 
+            box-shadow: 0 5px 15px rgba(39, 174, 96, 0.25);
+        }
+        .btn-next:hover { background: #219653; }
+
+        .btn-prev { 
+            background: #a0aec0; 
+            color: white; 
+        }
+        .btn-prev:hover { background: #4a5568; }
+
+        .btn-submit { 
+            background: var(--secondary-color); 
+            color: white; 
+            width: 100%; 
+            margin-top: 30px; 
+            box-shadow: 0 6px 15px rgba(44, 62, 80, 0.25);
+            display: none;
+        }
+        .btn-submit:hover { background: #1a252f; }
+
+        #results-area { 
+            display: none; 
+            margin-top: 45px; 
+            border-top: 3px dashed #cbd5e1; 
+            padding-top: 35px; 
+        }
+
+        .score-box { 
+            font-size: 28px; 
+            text-align: center; 
+            font-weight: bold; 
+            color: var(--primary-color); 
+            margin-bottom: 30px; 
+            padding: 25px;
+            background: #eafaf1;
+            border-radius: 14px;
+            border: 2px solid #c2e7d0;
+        }
+
+        .correct-answers-list { 
+            background: #fffdf5; 
+            padding: 30px; 
+            border-radius: 14px; 
+            border: 2px solid #fef08a; 
+        }
+
+        .correct-answers-list h3 {
+            margin-top: 0;
+            color: #854d0e;
+            border-bottom: 2px solid #fef08a;
+            padding-bottom: 12px;
+            font-size: 22px;
+        }
+
+        .ans-item { 
+            margin-bottom: 15px; 
+            border-bottom: 1px dashed #e2e8f0; 
+            padding-bottom: 12px; 
+            font-size: 17px;
+        }
+        .ans-item:last-child { border-bottom: none; }
+
+        .form-link-container {
+            margin-top: 35px;
+            text-align: center;
+        }
+
+        .btn-form-link {
+            display: inline-block;
+            background: linear-gradient(135deg, #9b59b6, #8e44ad);
+            color: white;
+            text-decoration: none;
+            padding: 16px 40px;
+            border-radius: 10px;
+            font-weight: bold;
+            font-size: 18px; 
+            box-shadow: 0 5px 18px rgba(142, 68, 173, 0.25);
+            transition: all 0.3s ease;
+        }
+
+        .btn-form-link:hover {
+            background: linear-gradient(135deg, #8e44ad, #7d3c98);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(142, 68, 173, 0.35);
+        }
+
+        @media (max-width: 600px) {
+            body { padding: 12px; font-size: 16px; }
+            .quiz-container { padding: 20px; margin: 15px auto; }
+            .door-title { font-size: 18px; padding: 15px; }
+            .question p { font-size: 17px; }
+            .options label { font-size: 16px; padding: 12px; }
+            .progress-step { font-size: 13px; padding: 6px 2px; }
+            button, .btn-form-link { width: 100%; box-sizing: border-box; }
+            .nav-buttons { flex-direction: column; gap: 10px; }
+        }
     </style>
 </head>
 <body>
@@ -29,12 +294,22 @@
 <div class="quiz-container">
     <h1>مراجعة الدورة التكوينية عن يوم الاقتراع</h1>
     
+    <div class="progress-container">
+        <div class="progress-step active" id="step1">الباب 1</div>
+        <div class="progress-step" id="step2">الباب 2</div>
+        <div class="progress-step" id="step3">الباب 3</div>
+        <div class="progress-step" id="step4">الباب 4</div>
+        <div class="progress-step" id="step5">الباب 5</div>
+    </div>
+
+    <div class="alert-message" id="alertBox">⚠️ نرجو الإجابة على جميع أسئلة هذا الباب أولاً للمتابعة.</div>
+    
     <form id="quizForm">
         <!-- الباب الأول: التنظيم والمكان -->
         <div class="door-section active" id="door1">
             <div class="door-title">الباب الأول: تنظيم مكتب التصويت وطريقة الجلوس</div>
             <div class="question">
-                <p>1. يجلس أعضاء مكتب التصويت الخمسة حول طاولة مخصصة تشكل ما يسمى بـ:</p>
+                <p>يجلس أعضاء مكتب التصويت الخمسة حول طاولة مخصصة تشكل ما يسمى بـ:</p>
                 <div class="options">
                     <label><input type="radio" name="q1" value="0"> نقطة التفتيش الخارجية</label>
                     <label><input type="radio" name="q1" value="1"> نقطة المراقبة المركزية لغرفة الاقتراع</label>
@@ -42,14 +317,14 @@
                 </div>
             </div>
             <div class="question">
-                <p>2. (صح أم خطأ) يجب تزويد المكتب بمعزل واحد أو أكثر لضمان السرية، بشرط ألا يحجب رؤية الجمهور للمسار العام للعملية:</p>
+                <p>(صح أم خطأ) يجب تزويد المكتب بمعزل واحد أو أكثر لضمان السرية، بشرط ألا يحجب رؤية الجمهور للمسار العام للعملية:</p>
                 <div class="options">
                     <label><input type="radio" name="q2" value="1"> صح</label>
                     <label><input type="radio" name="q2" value="0"> خطأ</label>
                 </div>
             </div>
             <div class="question">
-                <p>3. يتم قفل صندوق الاقتراع بقفلين مختلفين، يحتفظ رئيس المكتب بالمفتاح الأول، بينما يحتفظ بالمفتاح الثاني:</p>
+                <p>يتم قفل صندوق الاقتراع بقفلين مختلفين، يحتفظ رئيس المكتب بالمفتاح الأول، بينما يحتفظ بالمفتاح الثاني:</p>
                 <div class="options">
                     <label><input type="radio" name="q3" value="0"> نائب رئيس المكتب</label>
                     <label><input type="radio" name="q3" value="1"> العضو المساعد الأكبر سناً</label>
@@ -62,7 +337,7 @@
         <div class="door-section" id="door2">
             <div class="door-title">الباب الثاني: مهام رئيس مكتب التصويت</div>
             <div class="question">
-                <p>4. يتمتع رئيس مكتب التصويت داخل المكتب بـ:</p>
+                <p>يتشرف رئيس مكتب التصويت داخل المكتب بـ:</p>
                 <div class="options">
                     <label><input type="radio" name="q4" value="1"> سلطة الضبط وحفظ النظام</label>
                     <label><input type="radio" name="q4" value="0"> سلطة تشريعية مؤقتة</label>
@@ -70,14 +345,14 @@
                 </div>
             </div>
             <div class="question">
-                <p>5. (صح أم خطأ) رئيس المكتب ملزم بالتأكد من المطابقة بين عدد الأظرفة وأوراق التصويت والعدد القانوني للناخبين قبل الافتتاح:</p>
+                <p>(صح أم خطأ) رئيس المكتب ملزم بالتأكد من المطابقة بين عدد الأظرفة وأوراق التصويت والعدد القانوني للناخبين قبل الافتتاح:</p>
                 <div class="options">
                     <label><input type="radio" name="q5" value="1"> صح</label>
                     <label><input type="radio" name="q5" value="0"> خطأ</label>
                 </div>
             </div>
             <div class="question">
-                <p>6. من مهام رئيس المكتب الإشراف على عملية التوثيق والختم، والتي تشمل التبصيم بـ:</p>
+                <p>من مهام رئيس المكتب الإشراف على عملية التوثيق والختم، والتي تشمل التبصيم بـ:</p>
                 <div class="options">
                     <label><input type="radio" name="q6" value="0"> الإبهام الأيمن</label>
                     <label><input type="radio" name="q6" value="1"> السبابة اليسرى بحبر لا يمحى</label>
@@ -85,7 +360,7 @@
                 </div>
             </div>
             <div class="question">
-                <p>7. (صح أم خطأ) يحق لرئيس المكتب استدعاء القوة العمومية مباشرة دون رخصة تسخير من رئيس مركز التصويت:</p>
+                <p>(صح أم خطأ) يحق لرئيس المكتب استدعاء القوة العمومية مباشرة دون رخصة تسخير من رئيس مركز التصويت:</p>
                 <div class="options">
                     <label><input type="radio" name="q7" value="0"> صح</label>
                     <label><input type="radio" name="q7" value="1"> خطأ (يحتاج رخصة تسخير)</label>
@@ -97,7 +372,7 @@
         <div class="door-section" id="door3">
             <div class="door-title">الباب الثالث: آلية الفرز وتصنيف أوراق التصويت</div>
             <div class="question">
-                <p>8. يتم تعيين "الفارزين" لعد الأصوات علناً من بين:</p>
+                <p>يتم تعيين "الفارزين" لعد الأصوات علناً من بين:</p>
                 <div class="options">
                     <label><input type="radio" name="q8" value="0"> ممثلي الأحزاب</label>
                     <label><input type="radio" name="q8" value="1"> الناخبين الحاضرين (غير المترشحين)</label>
@@ -105,7 +380,7 @@
                 </div>
             </div>
             <div class="question">
-                <p>9. الأوراق التي لا تحتسب ضمن النتائج لعدم مطابقتها للقانون تسمى:</p>
+                <p>الأوراق التي لا تحتسب ضمن النتائج لعدم مطابقتها للقانون تسمى:</p>
                 <div class="options">
                     <label><input type="radio" name="q9" value="0"> الأوراق المعبر عنها</label>
                     <label><input type="radio" name="q9" value="1"> الأوراق الملغاة</label>
@@ -113,14 +388,14 @@
                 </div>
             </div>
             <div class="question">
-                <p>10. (صح أم خطأ) تعتبر الأوراق التي تحمل علامات إضافية أو المشطوبة كلياً أوراقاً ملغاة:</p>
+                <p>(صح أم خطأ) تعتبر الأوراق التي تحمل علامات إعلامية أو المشطوبة كلياً أوراقاً ملغاة:</p>
                 <div class="options">
                     <label><input type="radio" name="q10" value="1"> صح</label>
                     <label><input type="radio" name="q10" value="0"> خطأ</label>
                 </div>
             </div>
             <div class="question">
-                <p>11. الأوراق التي يثور حولها شك أو نزاع بين أعضاء المكتب أثناء الفرز تسمى:</p>
+                <p>الأوراق التي يثور حولها شك أو نزاع بين أعضاء المكتب أثناء الفرز تسمى:</p>
                 <div class="options">
                     <label><input type="radio" name="q11" value="0"> أوراق صحيحة</label>
                     <label><input type="radio" name="q11" value="1"> أوراق متنازع في صحتها</label>
@@ -133,7 +408,7 @@
         <div class="door-section" id="door4">
             <div class="door-title">الباب الرابع: كيفية حساب الأصوات وتسليم المحاضر</div>
             <div class="question">
-                <p>12. المعادلة القانونية لحساب "الأصوات المعبر عنها" هي:</p>
+                <p>المعادلة القانونية لحساب "الأصوات المعبر عنها" هي:</p>
                 <div class="options">
                     <label><input type="radio" name="q12" value="1"> الناخبون المصوتون - (الملغاة + المتنازع فيها)</label>
                     <label><input type="radio" name="q12" value="0"> مجموع الأوراق داخل الصندوق</label>
@@ -141,14 +416,14 @@
                 </div>
             </div>
             <div class="question">
-                <p>13. (صح أم خطأ) يتم تسليم نسخة المحضر للممثلين في اليوم الموالي بمقر الولاية:</p>
+                <p>(صح أم خطأ) يتم تسليم نسخة المحضر للممثلين في اليوم الموالي بمقر الولاية:</p>
                 <div class="options">
                     <label><input type="radio" name="q13" value="0"> صح</label>
                     <label><input type="radio" name="q13" value="1"> خطأ (تُسلم فوراً داخل المكتب)</label>
                 </div>
             </div>
             <div class="question">
-                <p>14. يجب أن تُغمد (تختم) كل صفحات نسخة المحضر المسلمة للممثلين بـ:</p>
+                <p>يجب أن تُغمد (تختم) كل صفحات نسخة المحضر المسلمة للممثلين بـ:</p>
                 <div class="options">
                     <label><input type="radio" name="q14" value="0"> ختم جاف</label>
                     <label><input type="radio" name="q14" value="1"> ختم ندي (رطب) يتضمن عبارة "نسخة مصادق عليها"</label>
@@ -156,7 +431,7 @@
                 </div>
             </div>
             <div class="question">
-                <p>15. (صح أم خطأ) لا تُسلم النسخة لأي ممثل إلا مقابل توقيعه الفوري على وصل استلام رسمي:</p>
+                <p>(صح أم خطأ) لا تُسلم النسخة لأي ممثل إلا مقابل توقيعه الفوري على وصل استلام رسمي:</p>
                 <div class="options">
                     <label><input type="radio" name="q15" value="1"> صح</label>
                     <label><input type="radio" name="q15" value="0"> خطأ</label>
@@ -168,7 +443,7 @@
         <div class="door-section" id="door5">
             <div class="door-title">الباب الخامس: جزاءات وأحكام إضافية</div>
             <div class="question">
-                <p>16. عقوبة الامتناع عن تسليم نسخة المحضر للممثلين المؤهلين هي الحبس من:</p>
+                <p>عقوبة الامتناع عن تسليم نسخة المحضر للممثلين المؤهلين هي الحبس من:</p>
                 <div class="options">
                     <label><input type="radio" name="q16" value="1"> سنة (1) إلى ثلاث (3) سنوات</label>
                     <label><input type="radio" name="q16" value="0"> شهر إلى 6 أشهر</label>
@@ -176,14 +451,14 @@
                 </div>
             </div>
             <div class="question">
-                <p>17. (صح أم خطأ) الأظرفة الفارغة (بدون ورقة تصويت) تعتبر أصواتاً صحيحة:</p>
+                <p>(صح أم خطأ) الأظرفة الفارغة (بدون ورقة تصويت) تعتبر أصواتاً صحيحة:</p>
                 <div class="options">
                     <label><input type="radio" name="q17" value="0"> صح</label>
                     <label><input type="radio" name="q17" value="1"> خطأ (تعتبر أوراقاً ملغاة)</label>
                 </div>
             </div>
             <div class="question">
-                <p>18. يجب إيداع قائمة الممثلين المؤهلين لدى السلطة المستقلة قبل يوم الاقتراع بـ:</p>
+                <p>يجب إيداع قائمة الممثلين المؤهلين لدى السلطة المستقلة قبل يوم الاقتراع بـ:</p>
                 <div class="options">
                     <label><input type="radio" name="q18" value="1"> 20 يوماً كاملة على الأقل</label>
                     <label><input type="radio" name="q18" value="0"> 5 أيام فقط</label>
@@ -191,14 +466,14 @@
                 </div>
             </div>
             <div class="question">
-                <p>19. (صح أم خطأ) تُفرز "الأصوات البيضاء" بشكل مستقل لتحديد نسب المشاركة في محضر الفرز:</p>
+                <p>(صح أم خطأ) تُفرز "الأصوات البيضاء" بشكل مستقل لتحديد نسب المشاركة في محضر الفرز:</p>
                 <div class="options">
                     <label><input type="radio" name="q19" value="1"> صح</label>
                     <label><input type="radio" name="q19" value="0"> خطأ</label>
                 </div>
             </div>
             <div class="question">
-                <p>20. يوقع محضر الفرز النهائي من قبل:</p>
+                <p>يوقع محضر الفرز النهائي من قبل:</p>
                 <div class="options">
                     <label><input type="radio" name="q20" value="0"> رئيس المكتب وحده</label>
                     <label><input type="radio" name="q20" value="1"> رئيس المكتب وكافة أعضائه</label>
@@ -209,16 +484,21 @@
 
         <div class="nav-buttons">
             <button type="button" class="btn-prev" id="prevBtn" onclick="changeDoor(-1)">السابق</button>
-            <button type="button" class="btn-next" id="nextBtn" onclick="changeDoor(1)">الباب التالي</button>
+            <button type="button" class="btn-next" id="nextBtn" onclick="validateAndNext()">الباب التالي</button>
         </div>
-        <button type="button" class="btn-submit" id="submitBtn" style="display:none;" onclick="calculateScore()">عرض النتيجة النهائية والأجوبة الصحيحة</button>
+        <button type="button" class="btn-submit" id="submitBtn" onclick="validateAndSubmit()">عرض النتيجة النهائية والأجوبة الصحيحة</button>
     </form>
 
     <div id="results-area">
         <div class="score-box" id="scoreDisplay"></div>
         <div class="correct-answers-list" id="answersList">
             <h3>مراجعة الإجابات الصحيحة (بناءً على القانون):</h3>
-            <!-- ستظهر الإجابات هنا -->
+        </div>
+        
+        <div class="form-link-container">
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfQS-8ghKjSfRgti1fYO5P69_HTo0RCeihcWBc7iSv7qQDSgA/viewform?usp=publish-editor" target="_blank" class="btn-form-link">
+                الانتقال للنموذج الرسمي وتقييم الاستمارة
+            </a>
         </div>
     </div>
 </div>
@@ -227,10 +507,97 @@
     let currentDoor = 1;
     const totalDoors = 5;
 
+    // دالة لخلط عناصر أي مصفوفة عشوائياً
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+    }
+
+    // خلط الأسئلة والخيارات عند تحميل الصفحة
+    window.addEventListener('DOMContentLoaded', () => {
+        // 1. خلط الأسئلة داخل كل باب بشكل منفصل
+        for (let i = 1; i <= totalDoors; i++) {
+            const door = document.getElementById(`door${i}`);
+            const questions = Array.from(door.querySelectorAll('.question'));
+            shuffleArray(questions);
+            // إعادة إدراج الأسئلة بالترتيب العشوائي الجديد بعد عنوان الباب
+            questions.forEach(q => door.appendChild(q));
+        }
+
+        // 2. خلط الخيارات (labels) داخل كل سؤال على حدة
+        const allQuestions = document.querySelectorAll('.question');
+        allQuestions.forEach(q => {
+            const optionsContainer = q.querySelector('.options');
+            const options = Array.from(optionsContainer.querySelectorAll('label'));
+            shuffleArray(options);
+            options.forEach(opt => optionsContainer.appendChild(opt));
+        });
+
+        // 3. إضافة أرقام تسلسلية للأسئلة برمجياً لتبدو مرتبة من 1 إلى 20 دائماً
+        const allQuestionsText = document.querySelectorAll('.question p');
+        allQuestionsText.forEach((p, index) => {
+            p.innerHTML = `${index + 1}. ${p.innerHTML}`;
+        });
+    });
+
+    function isCurrentDoorComplete() {
+        const currentSection = document.getElementById(`door${currentDoor}`);
+        const radioGroups = new Set();
+        
+        currentSection.querySelectorAll('input[type="radio"]').forEach(radio => {
+            radioGroups.add(radio.name);
+        });
+
+        for (let groupName of radioGroups) {
+            const checkedRadio = currentSection.querySelector(`input[name="${groupName}"]:checked`);
+            if (!checkedRadio) {
+                return false; 
+            }
+        }
+        return true; 
+    }
+
+    function validateAndNext() {
+        const alertBox = document.getElementById('alertBox');
+        if (isCurrentDoorComplete()) {
+            alertBox.style.display = 'none';
+            changeDoor(1);
+        } else {
+            alertBox.style.display = 'block';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    }
+
+    function validateAndSubmit() {
+        const alertBox = document.getElementById('alertBox');
+        if (isCurrentDoorComplete()) {
+            alertBox.style.display = 'none';
+            calculateScore();
+        } else {
+            alertBox.style.display = 'block';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    }
+
+    function updateProgressBar() {
+        for (let i = 1; i <= totalDoors; i++) {
+            const step = document.getElementById(`step${i}`);
+            if (i <= currentDoor) {
+                step.classList.add('active');
+            } else {
+                step.classList.remove('active');
+            }
+        }
+    }
+
     function changeDoor(step) {
         document.getElementById(`door${currentDoor}`).classList.remove('active');
         currentDoor += step;
         document.getElementById(`door${currentDoor}`).classList.add('active');
+
+        updateProgressBar();
 
         document.getElementById('prevBtn').style.visibility = (currentDoor === 1) ? 'hidden' : 'visible';
         
@@ -241,9 +608,10 @@
             document.getElementById('nextBtn').style.display = 'block';
             document.getElementById('submitBtn').style.display = 'none';
         }
+        
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    // إخفاء زر السابق في البداية
     document.getElementById('prevBtn').style.visibility = 'hidden';
 
     function calculateScore() {
@@ -254,7 +622,7 @@
             score += parseInt(value);
         }
 
-        document.getElementById('scoreDisplay').innerHTML = `نتيجتك: ${score} من 20 نقطة`;
+        document.getElementById('scoreDisplay').innerHTML = `نتيجتك النهائية: ${score} من 20 نقطة`;
         document.getElementById('results-area').style.display = 'block';
 
         const correctAnswers = [
@@ -280,13 +648,15 @@
             "20. توقيع رئيس المكتب وكافة أعضائه لضمان الشفافية [11]"
         ];
 
-        let answersHTML = "<h3>مراجعة الإجابات الصحيحة والمصادر:</h3>";
+        let answersHTML = "<h3>مراجعة الإجابات الصحيحة والمصادر (مرتبة حسب الأسئلة الأصلية):</h3>";
         correctAnswers.forEach(ans => {
             answersHTML += `<div class="ans-item">${ans}</div>`;
         });
         document.getElementById('answersList').innerHTML = answersHTML;
         
-        window.scrollTo(0, document.body.scrollHeight);
+        setTimeout(() => {
+            document.getElementById('results-area').scrollIntoView({ behavior: 'smooth' });
+        }, 100);
     }
 </script>
 </body>
